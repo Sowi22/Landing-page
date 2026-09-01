@@ -1,0 +1,7 @@
+Pega aquí el código embed de tu formulario (HubSpot u otro), tal como te lo da la plataforma.
+
+Ejemplo del formato que usamos con el Dr. Luis Alonso (HubSpot):
+<script src="https://js.hsforms.net/forms/embed/TU_PORTAL_ID.js" defer></script>
+<div class="hs-form-frame" data-region="na1" data-form-id="TU_FORM_ID" data-portal-id="TU_PORTAL_ID"></div>
+
+Si usas otra plataforma de formularios, pega el código embed que te dieron (el snippet <script> + <div>, o iframe) y lo adapto.

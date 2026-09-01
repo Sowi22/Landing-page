@@ -1,0 +1,761 @@
+<!--
+  PEGAR TODO ESTE ARCHIVO DENTRO DEL BLOQUE "HTML PERSONALIZADO" DE WORDPRESS (drpaolorossi.com).
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #ffffff;
+  --bg-alt: #f0f1f2;
+  --accent: #9AA0AA;
+  --accent-dark: #4d5055;
+  --gold: #ffd763;
+  --gold-dark: #d9b754;
+  --gold-text: #8c7636;
+  --dark: #1E2124;
+  --dark-alt: #101214;
+  --text: #24262B;
+  --text-muted: #5A5F68;
+  --border: #e3e4e7;
+  --serif: 'Crimson Text', serif;
+  --sans: 'Plus Jakarta Sans', sans-serif;
+}
+
+#dr-paolo-rossi-landing * { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+/* Luz ambiental que sigue el cursor (solo en dispositivos con mouse) */
+#dr-paolo-rossi-landing .cursor-glow {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0;
+  background: radial-gradient(500px circle at var(--mx, 50%) var(--my, 50%), rgba(154,160,170,.28), transparent 60%);
+}
+@media (hover: hover) and (pointer: fine) {
+  #dr-paolo-rossi-landing .cursor-glow { opacity: 1; transition: opacity .4s ease; }
+}
+
+/* Spotlight en tarjetas: se ilumina justo donde está el mouse */
+@media (hover: hover) and (pointer: fine) {
+  #dr-paolo-rossi-landing .proc-card { overflow: hidden; }
+  #dr-paolo-rossi-landing .hero__form { position: relative; }
+  #dr-paolo-rossi-landing .proc-card::before, #dr-paolo-rossi-landing .hero__form::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity .3s ease;
+    background: radial-gradient(220px circle at var(--sx, 50%) var(--sy, 50%), rgba(255,255,255,.16), transparent 70%);
+    pointer-events: none;
+  }
+  #dr-paolo-rossi-landing .hero__form::before {
+    background: radial-gradient(260px circle at var(--sx, 50%) var(--sy, 50%), rgba(154,160,170,.28), transparent 70%);
+  }
+  #dr-paolo-rossi-landing .proc-card:hover::before, #dr-paolo-rossi-landing .hero__form:hover::before { opacity: 1; }
+}
+
+/* Textura de grano sutil sobre toda la página */
+#dr-paolo-rossi-landing .grain-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  opacity: .05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Animación de aparición al hacer scroll */
+#dr-paolo-rossi-landing .reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+#dr-paolo-rossi-landing .reveal.is-visible { opacity: 1; transform: translateY(0); }
+#dr-paolo-rossi-landing .hero__trust-list li.reveal:nth-child(1) { transition-delay: 0s; }
+#dr-paolo-rossi-landing .hero__trust-list li.reveal:nth-child(2) { transition-delay: .08s; }
+#dr-paolo-rossi-landing .hero__trust-list li.reveal:nth-child(3) { transition-delay: .16s; }
+#dr-paolo-rossi-landing .proc-card.reveal:nth-child(1) { transition-delay: 0s; }
+#dr-paolo-rossi-landing .proc-card.reveal:nth-child(2) { transition-delay: .08s; }
+#dr-paolo-rossi-landing .proc-card.reveal:nth-child(3) { transition-delay: .16s; }
+#dr-paolo-rossi-landing .proc-card.reveal:nth-child(4) { transition-delay: .24s; }
+#dr-paolo-rossi-landing .about-card.reveal:nth-child(1) { transition-delay: 0s; }
+#dr-paolo-rossi-landing .about-card.reveal:nth-child(2) { transition-delay: .08s; }
+#dr-paolo-rossi-landing .about-card.reveal:nth-child(3) { transition-delay: .16s; }
+#dr-paolo-rossi-landing .about-card.reveal:nth-child(4) { transition-delay: .24s; }
+@media (prefers-reduced-motion: reduce) {
+  #dr-paolo-rossi-landing .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+/* Wordmark de texto (el logo real del sitio es un PNG blanco pensado para fondo oscuro;
+   sobre nuestro hero claro sería invisible, así que usamos su nombre como wordmark
+   hasta que exista una versión a color en la carpeta Logos). */
+#dr-paolo-rossi-landing .hero__logo-top {
+  text-align: center;
+  margin-bottom: 22px;
+}
+#dr-paolo-rossi-landing .hero__wordmark {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(22px, 1.6vw + 16px, 30px);
+  color: var(--dark);
+  letter-spacing: .5px;
+}
+#dr-paolo-rossi-landing .hero__wordmark span { color: var(--accent); }
+#dr-paolo-rossi-landing .hero__wordmark-sub {
+  display: block;
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+#dr-paolo-rossi-landing {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+#dr-paolo-rossi-landing img { max-width: 100%; display: block; }
+
+#dr-paolo-rossi-landing .container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+@media (min-width: 1440px) {
+  #dr-paolo-rossi-landing .container, #dr-paolo-rossi-landing .hero__inner { max-width: 1380px; }
+  #dr-paolo-rossi-landing .hero__text { max-width: 680px; }
+}
+
+#dr-paolo-rossi-landing { font-size: clamp(16px, .9vw + 6px, 18px); }
+
+#dr-paolo-rossi-landing .eyebrow {
+  color: var(--accent-dark);
+  font-family: var(--sans);
+  font-size: clamp(12px, .5vw + 9px, 14px);
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+#dr-paolo-rossi-landing h1, #dr-paolo-rossi-landing h2, #dr-paolo-rossi-landing h3 {
+  font-family: var(--serif);
+  font-weight: 600;
+  line-height: 1.12;
+}
+
+#dr-paolo-rossi-landing .accent { color: var(--gold-text); }
+
+#dr-paolo-rossi-landing svg { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+
+/* HERO + FORM */
+#dr-paolo-rossi-landing .hero {
+  position: relative;
+  padding: 56px 0 70px;
+  overflow: hidden;
+  background: linear-gradient(180deg, var(--bg-alt) 0%, var(--bg) 45%);
+}
+#dr-paolo-rossi-landing .hero__glow {
+  position: absolute;
+  top: -15%; right: -10%;
+  width: 60%; height: 75%;
+  background: radial-gradient(circle, rgba(54,56,59,.55) 0%, rgba(154,160,170,.32) 40%, transparent 75%);
+  filter: blur(90px);
+  z-index: 0;
+}
+#dr-paolo-rossi-landing .hero__inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: .92fr 1.08fr;
+  grid-template-areas: "text form" "trust form";
+  column-gap: 48px;
+  row-gap: 0;
+  align-items: stretch;
+}
+#dr-paolo-rossi-landing .hero__text { grid-area: text; max-width: 560px; padding-top: 14px; min-width: 0; }
+#dr-paolo-rossi-landing .hero__form { grid-area: form; min-width: 0; }
+#dr-paolo-rossi-landing .hero__trust { grid-area: trust; min-width: 0; }
+#dr-paolo-rossi-landing .hero__text h1 { font-size: clamp(30px, 2.2vw + 18px, 48px); margin-bottom: 20px; color: var(--dark); }
+#dr-paolo-rossi-landing .hero__sub { color: var(--text-muted); font-size: clamp(15px, .5vw + 13px, 18px); max-width: 480px; margin-bottom: 32px; }
+
+#dr-paolo-rossi-landing .hero__stats { list-style: none; display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; margin-bottom: 34px; max-width: 460px; }
+#dr-paolo-rossi-landing .hero__stats li { display: flex; align-items: flex-start; gap: 9px; font-size: clamp(11px, .25vw + 10px, 13px); color: var(--text-muted); }
+#dr-paolo-rossi-landing .hero__stats svg { width: 22px; height: 22px; color: var(--accent); flex-shrink: 0; margin-top: 2px; }
+#dr-paolo-rossi-landing .hero__stats strong { display: block; font-family: var(--serif); font-size: clamp(15px, .5vw + 13px, 18px); font-weight: 600; color: var(--dark); line-height: 1.3; }
+
+#dr-paolo-rossi-landing .hero__trust {
+  margin-top: 8px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+}
+#dr-paolo-rossi-landing .hero__trust-title {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(16px, .6vw + 13px, 19px);
+  color: var(--text);
+  margin-bottom: 4px;
+}
+#dr-paolo-rossi-landing .hero__trust-list { list-style: none; }
+#dr-paolo-rossi-landing .hero__trust-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 22px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border);
+}
+#dr-paolo-rossi-landing .hero__trust-list li:last-child { border-bottom: none; padding-bottom: 0; }
+#dr-paolo-rossi-landing .hero__trust-num {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 15px;
+  color: var(--accent-dark);
+  opacity: .5;
+  min-width: 20px;
+  flex-shrink: 0;
+  padding-top: 1px;
+}
+#dr-paolo-rossi-landing .hero__trust-item-title {
+  display: block;
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: clamp(12.5px, .3vw + 11px, 14px);
+  letter-spacing: .6px;
+  text-transform: uppercase;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+#dr-paolo-rossi-landing .hero__trust-list p {
+  font-size: clamp(13px, .25vw + 12px, 14.5px);
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+#dr-paolo-rossi-landing .hero__form {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 36px;
+  box-shadow: 0 30px 70px rgba(154,160,170,.28);
+}
+#dr-paolo-rossi-landing .hero__form .eyebrow { color: var(--accent-dark); }
+#dr-paolo-rossi-landing .hero__form h2 { font-size: clamp(24px, 1.3vw + 17px, 32px); font-weight: 500; margin-bottom: 24px; color: var(--dark); }
+
+/* SECTION TITLE */
+#dr-paolo-rossi-landing .section-title { text-align: center; margin-bottom: 40px; }
+#dr-paolo-rossi-landing .section-title .eyebrow { font-size: clamp(24px, 1.4vw + 18px, 38px); font-family: var(--serif); letter-spacing: .3px; text-transform: none; color: var(--dark); }
+#dr-paolo-rossi-landing .section-title .eyebrow::after {
+  content: '';
+  display: block;
+  width: 50px; height: 2px;
+  background: var(--accent);
+  margin: 16px auto 0;
+}
+#dr-paolo-rossi-landing .section-title__sub { color: var(--text-muted); font-size: clamp(14px, .4vw + 12px, 17px); margin-top: 14px; max-width: 620px; margin-left: auto; margin-right: auto; }
+
+/* PROCEDURES (sin video/foto por procedimiento todavía: tarjetas con icono + degradado de marca) */
+#dr-paolo-rossi-landing .procedures { padding: 90px 0; background: var(--bg-alt); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+#dr-paolo-rossi-landing .procedures__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+#dr-paolo-rossi-landing .proc-card {
+  position: relative;
+  aspect-ratio: 3/4;
+  border-radius: 24px;
+  overflow: hidden;
+  text-decoration: none;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 24px;
+  border: 1px solid var(--border);
+  background: linear-gradient(155deg, var(--dark) 0%, var(--accent-dark) 130%);
+  transition: transform .4s cubic-bezier(.2,.8,.2,1), box-shadow .4s;
+}
+#dr-paolo-rossi-landing .proc-card:hover { transform: translateY(-8px); box-shadow: 0 26px 50px rgba(154,160,170,.44); }
+#dr-paolo-rossi-landing .proc-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: .1;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+#dr-paolo-rossi-landing .proc-card__icon, #dr-paolo-rossi-landing .proc-card__body, #dr-paolo-rossi-landing .proc-card__plus { position: relative; z-index: 2; }
+#dr-paolo-rossi-landing .proc-card__icon {
+  position: absolute;
+  top: 20px; left: 20px;
+  width: 46px; height: 46px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(255,255,255,.1);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,.2);
+}
+#dr-paolo-rossi-landing .proc-card__icon svg { width: 20px; height: 20px; color: var(--gold); }
+#dr-paolo-rossi-landing .proc-card__body h3 { font-size: clamp(18px, .7vw + 15px, 23px); font-weight: 600; }
+#dr-paolo-rossi-landing .proc-card__plus {
+  position: absolute;
+  bottom: 20px; right: 20px;
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+  color: #ffffff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; font-weight: 600; line-height: 1;
+}
+
+#dr-paolo-rossi-landing .procedures__dots { display: none; justify-content: center; gap: 8px; margin-top: 20px; }
+#dr-paolo-rossi-landing .trust__dots { display: none; justify-content: center; gap: 8px; margin-top: 16px; }
+#dr-paolo-rossi-landing .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--border); transition: background .2s, transform .2s; }
+#dr-paolo-rossi-landing .dot.is-active { background: var(--accent); transform: scale(1.35); }
+
+/* ABOUT / EXPERIENCIA PROFESIONAL */
+#dr-paolo-rossi-landing .about { padding: 90px 0; }
+#dr-paolo-rossi-landing .about__top {
+  display: grid;
+  grid-template-columns: .85fr 1.15fr;
+  gap: 56px;
+  align-items: center;
+  margin-bottom: 56px;
+}
+#dr-paolo-rossi-landing .about__photo-wrap { position: relative; display: flex; justify-content: center; }
+#dr-paolo-rossi-landing .about__photo-glow {
+  position: absolute;
+  top: 6%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 92%;
+  height: 92%;
+  background: radial-gradient(circle, rgba(154,160,170,.35) 0%, rgba(217,183,84,.22) 55%, transparent 75%);
+  filter: blur(46px);
+  z-index: 0;
+}
+#dr-paolo-rossi-landing .about__photo {
+  position: relative;
+  z-index: 1;
+  max-width: 320px;
+  width: 100%;
+  filter: drop-shadow(0 24px 40px rgba(30,33,36,.18));
+}
+#dr-paolo-rossi-landing .about__intro { max-width: none; margin: 0; text-align: left; }
+#dr-paolo-rossi-landing .about__intro p { color: var(--text-muted); font-size: clamp(15px, .4vw + 13px, 17px); margin-top: 14px; }
+#dr-paolo-rossi-landing .about__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+}
+#dr-paolo-rossi-landing .about-card {
+  padding: 30px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: var(--bg-alt);
+}
+#dr-paolo-rossi-landing .about-card h3 {
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: .6px;
+  text-transform: uppercase;
+  color: var(--accent-dark);
+  margin-bottom: 10px;
+}
+#dr-paolo-rossi-landing .about-card p { color: var(--text-muted); font-size: clamp(13.5px, .25vw + 12px, 15px); line-height: 1.6; }
+
+/* CREDENCIALES (logos de asociaciones reales) */
+#dr-paolo-rossi-landing .credentials { padding: 56px 0; text-align: center; }
+#dr-paolo-rossi-landing .credentials p { color: var(--text-muted); font-size: 13px; letter-spacing: .5px; text-transform: uppercase; margin-bottom: 24px; }
+#dr-paolo-rossi-landing .credentials__logos { display: flex; align-items: center; justify-content: center; gap: 40px; flex-wrap: wrap; }
+#dr-paolo-rossi-landing .credentials__logos img { max-height: 60px; width: auto; filter: grayscale(1); opacity: .75; }
+
+/* FORM (HubSpot) */
+#dr-paolo-rossi-landing .hs-form-container { position: relative; min-height: 80px; padding-bottom: 60px; overflow: hidden; }
+#dr-paolo-rossi-landing .hs-form-cover {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 84px;
+  background: #ffffff;
+  z-index: 5;
+}
+#dr-paolo-rossi-landing .hs-form-container input, #dr-paolo-rossi-landing .hs-form-container select, #dr-paolo-rossi-landing .hs-form-container textarea {
+  border-radius: 10px !important;
+  padding: 14px 16px !important;
+  font-size: clamp(14px, .3vw + 13px, 16px) !important;
+  width: 100% !important;
+}
+#dr-paolo-rossi-landing .hs-form-container input:focus, #dr-paolo-rossi-landing .hs-form-container select:focus, #dr-paolo-rossi-landing .hs-form-container textarea:focus { border-color: var(--accent) !important; outline: none !important; }
+#dr-paolo-rossi-landing .hs-form-container ul.inputs-list { list-style: none !important; }
+#dr-paolo-rossi-landing .hs-form-container .hs-button, #dr-paolo-rossi-landing .hs-form-container input[type="submit"] {
+  background: linear-gradient(135deg, var(--accent), var(--accent-dark)) !important;
+  color: #ffffff !important;
+  border: none !important;
+  border-radius: 999px !important;
+  padding: 15px 30px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: .8px !important;
+  cursor: pointer !important;
+  width: auto !important;
+}
+#dr-paolo-rossi-landing .hs-form-container [class*="branding"] { display: none !important; }
+#dr-paolo-rossi-landing .hs-form-container fieldset {
+  max-width: 100% !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 0 18px !important;
+}
+#dr-paolo-rossi-landing .hs-form-container fieldset > .hs-form-field, #dr-paolo-rossi-landing .hs-form-container fieldset > div {
+  flex: 1 1 100% !important;
+  max-width: 100% !important;
+  margin-bottom: 14px !important;
+}
+#dr-paolo-rossi-landing .hs-form-container fieldset.form-columns-2 > .hs-form-field, #dr-paolo-rossi-landing .hs-form-container fieldset.form-columns-2 > div {
+  flex: 1 1 calc(50% - 9px) !important;
+  max-width: calc(50% - 9px) !important;
+}
+#dr-paolo-rossi-landing .hs-form-container .hs-form-field label { margin-bottom: 5px !important; }
+@media (max-width: 480px) {
+  #dr-paolo-rossi-landing .hs-form-container fieldset.form-columns-2 > .hs-form-field, #dr-paolo-rossi-landing .hs-form-container fieldset.form-columns-2 > div {
+    flex: 1 1 100% !important;
+    max-width: 100% !important;
+  }
+}
+
+#dr-paolo-rossi-landing .contact__trust {
+  display: flex;
+  gap: 24px;
+  margin-top: 22px;
+  flex-wrap: wrap;
+}
+#dr-paolo-rossi-landing .contact__trust span { display: flex; align-items: center; gap: 8px; font-size: clamp(13px, .3vw + 12px, 15px); color: var(--text-muted); }
+#dr-paolo-rossi-landing .contact__trust svg { width: 18px; height: 18px; color: var(--accent); }
+
+/* FOOTER */
+#dr-paolo-rossi-landing .footer { padding: 56px 0; background: var(--dark); color: rgba(255,255,255,.8); }
+#dr-paolo-rossi-landing .footer__grid { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 40px; }
+#dr-paolo-rossi-landing .footer__title { font-family: var(--serif); font-size: 22px; color: #fff; margin-bottom: 12px; }
+#dr-paolo-rossi-landing .footer p, #dr-paolo-rossi-landing .footer a { color: rgba(255,255,255,.7); font-size: 14px; text-decoration: none; line-height: 1.8; }
+#dr-paolo-rossi-landing .footer a:hover { color: var(--gold); }
+#dr-paolo-rossi-landing .footer__social { display: flex; gap: 14px; margin-top: 16px; }
+#dr-paolo-rossi-landing .footer__social a { width: 38px; height: 38px; border-radius: 50%; border: 1px solid rgba(255,255,255,.2); display: flex; align-items: center; justify-content: center; }
+#dr-paolo-rossi-landing .footer__social svg { width: 17px; height: 17px; color: #fff; }
+#dr-paolo-rossi-landing .footer__bottom { margin-top: 40px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.12); text-align: center; font-size: 13px; color: rgba(255,255,255,.5); }
+#dr-paolo-rossi-landing .footer__pending { color: var(--gold); font-weight: 600; }
+
+/* RESPONSIVE */
+@media (max-width: 960px) {
+  #dr-paolo-rossi-landing .hero__inner {
+    grid-template-columns: 1fr;
+    grid-template-areas: "text" "form" "trust";
+    row-gap: 32px;
+  }
+  #dr-paolo-rossi-landing .hero__text { max-width: 100%; }
+  #dr-paolo-rossi-landing .hero__form { max-width: 520px; }
+  #dr-paolo-rossi-landing .procedures__grid { grid-template-columns: repeat(2, 1fr); }
+  #dr-paolo-rossi-landing .about__top { grid-template-columns: 1fr; gap: 32px; text-align: center; }
+  #dr-paolo-rossi-landing .about__intro { text-align: center; }
+  #dr-paolo-rossi-landing .about__photo { max-width: 260px; }
+  #dr-paolo-rossi-landing .about__grid { grid-template-columns: 1fr; }
+  #dr-paolo-rossi-landing .footer__grid { grid-template-columns: 1fr; gap: 28px; }
+}
+
+@media (max-width: 640px) {
+  #dr-paolo-rossi-landing .hero { padding-top: 40px; padding-bottom: 40px; }
+  #dr-paolo-rossi-landing .hero__text h1 { font-size: 29px; }
+  #dr-paolo-rossi-landing .hero__form { padding: 26px; border-radius: 20px; }
+  #dr-paolo-rossi-landing .procedures { padding: 56px 0; }
+  #dr-paolo-rossi-landing .procedures__grid { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 14px; padding-bottom: 4px; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+  #dr-paolo-rossi-landing .procedures__grid::-webkit-scrollbar { display: none; }
+  #dr-paolo-rossi-landing .proc-card { flex: 0 0 68%; scroll-snap-align: center; aspect-ratio: 3/4; }
+  #dr-paolo-rossi-landing .procedures__dots { display: flex; }
+  #dr-paolo-rossi-landing .section-title .eyebrow { font-size: 21px; }
+  #dr-paolo-rossi-landing .about { padding: 56px 0; }
+  #dr-paolo-rossi-landing .credentials__logos { gap: 24px; }
+  #dr-paolo-rossi-landing .credentials__logos img { max-height: 44px; }
+
+  /* Credenciales/"por qué elegir" como carrusel deslizable en celular */
+  #dr-paolo-rossi-landing .hero__trust-list {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 14px;
+    padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  #dr-paolo-rossi-landing .hero__trust-list::-webkit-scrollbar { display: none; }
+  #dr-paolo-rossi-landing .hero__trust-list li {
+    flex: 0 0 82%;
+    scroll-snap-align: center;
+    border-bottom: none;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 18px;
+    background: #ffffff;
+  }
+  #dr-paolo-rossi-landing .trust__dots { display: flex; }
+}
+
+/* Rompe el contenedor angosto del tema para ocupar todo el ancho de la pantalla */
+#dr-paolo-rossi-landing {
+  position: relative;
+  left: 50%;
+  right: 50%;
+  width: 100vw;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+</style>
+
+<div id="dr-paolo-rossi-landing">
+
+<div class="cursor-glow" aria-hidden="true"></div>
+<div class="grain-overlay" aria-hidden="true"></div>
+
+<section class="hero" id="inicio">
+  <div class="hero__glow"></div>
+  <div class="container">
+    <div class="hero__logo-top">
+      <span class="hero__wordmark">Paolo <span>Rossi</span></span>
+      <span class="hero__wordmark-sub">Armonización Dentofacial</span>
+    </div>
+  <div class="hero__inner">
+    <div class="hero__text">
+      <p class="eyebrow">Dr. Paolo Rossi &mdash; Armonización Dentofacial</p>
+      <h1>Belleza natural. <span class="accent">Resultados extraordinarios.</span></h1>
+      <p class="hero__sub">Tratamientos mínimamente invasivos enfocados en rejuvenecer y definir tu rostro sin perder tu naturalidad.</p>
+
+      <ul class="hero__stats">
+        <li>
+          <svg viewBox="0 0 24 24"><path d="M12 2l7 4v6c0 5-3.4 8.7-7 10-3.6-1.3-7-5-7-10V6z"/></svg>
+          <span><strong>+8 años</strong>de experiencia</span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24"><path d="M17 20h5v-1a4 4 0 00-4-4h-1M9 20H4v-1a4 4 0 014-4h1m0-3a3 3 0 100-6 3 3 0 000 6zm7 0a3 3 0 100-6 3 3 0 000 6z"/></svg>
+          <span><strong>+1.500 pacientes</strong>atendidos</span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4M7.8 3.2a2 2 0 012.4 0 2 2 0 002.4 0 2 2 0 012.4 1.6 2 2 0 001.7 1.7 2 2 0 011.6 2.4 2 2 0 000 2.4 2 2 0 01-1.6 2.4 2 2 0 00-1.7 1.7 2 2 0 01-2.4 1.6 2 2 0 00-2.4 0 2 2 0 01-2.4-1.6 2 2 0 00-1.7-1.7 2 2 0 01-1.6-2.4 2 2 0 000-2.4A2 2 0 015.7 6.5a2 2 0 001.7-1.7 2 2 0 012.4-1.6z"/></svg>
+          <span><strong>+10 procedimientos</strong>especializados</span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24"><path d="M8.5 14L7 22l5-3 5 3-1.5-8"/><path d="M12 15a5 5 0 100-10 5 5 0 000 10z"/></svg>
+          <span><strong>100% satisfacción</strong>de pacientes</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="hero__form" id="contacto">
+      <p class="eyebrow">Agenda tu</p>
+      <h2>Valoración personalizada</h2>
+
+      <div class="hs-form-container">
+        <script src="https://js.hsforms.net/forms/embed/51695573.js" defer></script>
+        <div class="hs-form-frame" data-region="na1" data-form-id="cd09136d-a7c3-443f-9b1b-8785023e16f8" data-portal-id="51695573"></div>
+        <div class="hs-form-cover"></div>
+      </div>
+
+      <div class="contact__trust">
+        <span><svg viewBox="0 0 24 24"><path d="M12 2l7 4v6c0 5-3.4 8.7-7 10-3.6-1.3-7-5-7-10V6z"/></svg>Tus datos están protegidos.</span>
+        <span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 7v5l3.5 3.5"/></svg>Te contactamos a la brevedad.</span>
+      </div>
+    </div>
+
+    <div class="hero__trust">
+      <p class="hero__trust-title">¿Por qué elegir al Dr. Paolo Rossi?</p>
+      <ul class="hero__trust-list" id="trustTrack">
+        <li class="reveal">
+          <span class="hero__trust-num">01</span>
+          <div>
+            <span class="hero__trust-item-title">Atención Exclusiva</span>
+            <p>Brindamos un acompañamiento cercano y personalizado en cada etapa de tu transformación.</p>
+          </div>
+        </li>
+        <li class="reveal">
+          <span class="hero__trust-num">02</span>
+          <div>
+            <span class="hero__trust-item-title">Resultados Naturales</span>
+            <p>Realzamos tu belleza sin perder tu esencia, buscando equilibrio, elegancia y confianza en cada procedimiento.</p>
+          </div>
+        </li>
+        <li class="reveal">
+          <span class="hero__trust-num">03</span>
+          <div>
+            <span class="hero__trust-item-title">Tecnología y Experiencia</span>
+            <p>Combinamos técnicas avanzadas, precisión y experiencia profesional para ofrecer procedimientos seguros y de alta calidad.</p>
+          </div>
+        </li>
+      </ul>
+      <div class="trust__dots" id="trustDots">
+        <span class="dot is-active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+    </div>
+  </div>
+  </div>
+</section>
+
+<section class="procedures" id="procedimientos">
+  <div class="container">
+    <div class="section-title reveal">
+      <p class="eyebrow">¿Qué deseas transformar?</p>
+      <p class="section-title__sub">Procedimientos estéticos enfocados en definición, armonía y naturalidad.</p>
+    </div>
+
+    <div class="procedures__grid" id="procTrack">
+      <a href="https://www.drpaolorossi.com/services/" class="proc-card reveal" target="_blank" rel="noopener">
+        <span class="proc-card__icon"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 00-7 7c0 3 1.5 5 3 6.5V19a2 2 0 002 2h4a2 2 0 002-2v-3.5c1.5-1.5 3-3.5 3-6.5a7 7 0 00-7-7z"/></svg></span>
+        <span class="proc-card__body"><h3>Lipopapada</h3></span>
+        <span class="proc-card__plus">+</span>
+      </a>
+      <a href="https://www.drpaolorossi.com/services/" class="proc-card reveal" target="_blank" rel="noopener">
+        <span class="proc-card__icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9 10c.5-1 1.5-1.5 3-1.5s2.5.5 3 1.5M9 15c.8.7 1.8 1 3 1s2.2-.3 3-1"/></svg></span>
+        <span class="proc-card__body"><h3>Alectomía</h3></span>
+        <span class="proc-card__plus">+</span>
+      </a>
+      <a href="https://www.drpaolorossi.com/services/" class="proc-card reveal" target="_blank" rel="noopener">
+        <span class="proc-card__icon"><svg viewBox="0 0 24 24"><path d="M4 12h4l2-6 4 12 2-6h4"/></svg></span>
+        <span class="proc-card__body"><h3>Endolifting facial y cervical</h3></span>
+        <span class="proc-card__plus">+</span>
+      </a>
+      <a href="https://www.drpaolorossi.com/services/" class="proc-card reveal" target="_blank" rel="noopener">
+        <span class="proc-card__icon"><svg viewBox="0 0 24 24"><path d="M12 3v10M12 13l-3 5h6l-3-5z"/><path d="M8 21h8"/></svg></span>
+        <span class="proc-card__body"><h3>Rinomodelación</h3></span>
+        <span class="proc-card__plus">+</span>
+      </a>
+    </div>
+    <div class="procedures__dots" id="procDots">
+      <span class="dot is-active"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+  </div>
+</section>
+
+
+
+</div>
+
+<script>
+(function() {
+  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    var glow = document.querySelector('.cursor-glow');
+    var ticking = false;
+    var lastX = 0, lastY = 0;
+
+    window.addEventListener('mousemove', function(e) {
+      lastX = e.clientX;
+      lastY = e.clientY;
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(function() {
+          if (glow) {
+            glow.style.setProperty('--mx', lastX + 'px');
+            glow.style.setProperty('--my', lastY + 'px');
+          }
+          ticking = false;
+        });
+      }
+    }, { passive: true });
+
+    var spotlightEls = document.querySelectorAll('.proc-card, .hero__form');
+    for (var i = 0; i < spotlightEls.length; i++) {
+      (function(el) {
+        el.addEventListener('mousemove', function(e) {
+          var r = el.getBoundingClientRect();
+          el.style.setProperty('--sx', (e.clientX - r.left) + 'px');
+          el.style.setProperty('--sy', (e.clientY - r.top) + 'px');
+        }, { passive: true });
+      })(spotlightEls[i]);
+    }
+  }
+
+  var revealEls = document.querySelectorAll('.reveal');
+  if (revealEls.length) {
+    if ('IntersectionObserver' in window) {
+      var revealObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+      revealEls.forEach(function(el) { revealObserver.observe(el); });
+    } else {
+      revealEls.forEach(function(el) { el.classList.add('is-visible'); });
+    }
+  }
+
+  function wireCarouselDots(trackId, dotsSelector) {
+    var track = document.getElementById(trackId);
+    var dots = document.querySelectorAll(dotsSelector);
+    if (!track || !dots.length) return;
+    track.addEventListener('scroll', function() {
+      var cards = [].slice.call(track.children);
+      var center = track.scrollLeft + track.clientWidth / 2;
+      var closest = 0;
+      var min = Infinity;
+      cards.forEach(function(card, i) {
+        var dist = Math.abs(card.offsetLeft + card.offsetWidth / 2 - center);
+        if (dist < min) { min = dist; closest = i; }
+      });
+      dots.forEach(function(dot, i) { dot.classList.toggle('is-active', i === closest); });
+    }, { passive: true });
+  }
+  wireCarouselDots('procTrack', '#procDots .dot');
+  wireCarouselDots('trustTrack', '#trustDots .dot');
+
+  var trustTrack = document.getElementById('trustTrack');
+  if (trustTrack) {
+    if ('IntersectionObserver' in window) {
+      var peekObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            if (window.matchMedia('(max-width: 640px)').matches) {
+              setTimeout(function() {
+                trustTrack.scrollTo({ left: 70, behavior: 'smooth' });
+                setTimeout(function() {
+                  trustTrack.scrollTo({ left: 0, behavior: 'smooth' });
+                }, 700);
+              }, 500);
+            }
+            peekObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.5 });
+      peekObserver.observe(trustTrack);
+    }
+  }
+})();
+</script>
