@@ -1,11 +1,13 @@
-/* En móvil: "¿por qué elegir?" pasa a ir después de los procedimientos (videos), no antes */
+/* En móvil: los procedimientos (videos) pasan a estar entre el texto y el
+   formulario, para que se vean antes de llegar al formulario. El orden final
+   queda: texto, videos, formulario, "por qué elegir" (esto último ya queda
+   último por el propio grid-template-areas, sin necesidad de moverlo). */
 if (window.matchMedia('(max-width: 960px)').matches) {
-  const heroTrust = document.querySelector('.hero__trust');
+  const heroText = document.querySelector('.hero__text');
   const procedures = document.getElementById('procedimientos');
-  if (heroTrust) {
+  if (heroText) {
     if (procedures) {
-      heroTrust.classList.add('hero__trust--standalone');
-      procedures.insertAdjacentElement('afterend', heroTrust);
+      heroText.insertAdjacentElement('afterend', procedures);
     }
   }
 }

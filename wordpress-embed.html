@@ -163,6 +163,25 @@ html { scroll-behavior: smooth; }
 
 #dr-paolo-rossi-landing .accent { color: var(--gold-text); }
 
+/* Brillo metálico plateado sutil, jugando literalmente con el "plateado" de la marca */
+#dr-paolo-rossi-landing .shimmer {
+  background: linear-gradient(100deg, #6b7078 20%, #cfd3d9 40%, #ffffff 50%, #cfd3d9 60%, #6b7078 80%);
+  background-size: 220% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer-sweep 6s ease-in-out infinite;
+}
+@keyframes shimmer-sweep {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #dr-paolo-rossi-landing .shimmer { animation: none; background-position: 30% 50%; }
+}
+
 #dr-paolo-rossi-landing svg { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
 
 /* HERO + FORM */
@@ -209,16 +228,6 @@ html { scroll-behavior: smooth; }
   margin-top: 8px;
   padding-top: 28px;
   border-top: 1px solid var(--border);
-}
-/* En móvil esta sección se mueve por JS a después de "procedimientos";
-   como deja de estar dentro de .container, necesita su propio padding lateral. */
-#dr-paolo-rossi-landing .hero__trust--standalone {
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 24px;
-  padding-right: 24px;
-  padding-bottom: 48px;
 }
 #dr-paolo-rossi-landing .hero__trust-title {
   font-family: var(--serif);
@@ -491,9 +500,12 @@ html { scroll-behavior: smooth; }
 @media (max-width: 960px) {
   #dr-paolo-rossi-landing .hero__inner {
     grid-template-columns: 1fr;
-    grid-template-areas: "text" "form" "trust";
+    grid-template-areas: "text" "procedures" "form" "trust";
     row-gap: 32px;
   }
+  /* En móvil, la sección de procedimientos (JS la mueve aquí) se vuelve parte
+     de esta cuadrícula para poder aparecer entre el texto y el formulario. */
+  #dr-paolo-rossi-landing #procedimientos { grid-area: procedures; }
   #dr-paolo-rossi-landing .hero__text { max-width: 100%; }
   #dr-paolo-rossi-landing .hero__form { max-width: 520px; }
   #dr-paolo-rossi-landing .procedures__grid { grid-template-columns: repeat(2, 1fr); }
@@ -567,7 +579,7 @@ html { scroll-behavior: smooth; }
   <div class="hero__inner">
     <div class="hero__text">
       <p class="eyebrow">Dr. Paolo Rossi &mdash; Armonización Dentofacial</p>
-      <h1>Belleza natural. <span class="accent">Resultados extraordinarios.</span></h1>
+      <h1><span class="shimmer">Belleza natural.</span> <span class="accent">Resultados extraordinarios.</span></h1>
       <p class="hero__sub">Tratamientos mínimamente invasivos enfocados en rejuvenecer y definir tu rostro sin perder tu naturalidad.</p>
 
       <ul class="hero__stats">
@@ -683,12 +695,11 @@ html { scroll-behavior: smooth; }
 <script>
 (function() {
   if (window.matchMedia('(max-width: 960px)').matches) {
-    var heroTrust = document.querySelector('.hero__trust');
+    var heroText = document.querySelector('.hero__text');
     var procedures = document.getElementById('procedimientos');
-    if (heroTrust) {
+    if (heroText) {
       if (procedures) {
-        heroTrust.classList.add('hero__trust--standalone');
-        procedures.insertAdjacentElement('afterend', heroTrust);
+        heroText.insertAdjacentElement('afterend', procedures);
       }
     }
   }

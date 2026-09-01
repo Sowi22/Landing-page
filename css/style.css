@@ -155,6 +155,25 @@ h1, h2, h3 {
 
 .accent { color: var(--gold-text); }
 
+/* Brillo metálico plateado sutil, jugando literalmente con el "plateado" de la marca */
+.shimmer {
+  background: linear-gradient(100deg, #6b7078 20%, #cfd3d9 40%, #ffffff 50%, #cfd3d9 60%, #6b7078 80%);
+  background-size: 220% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer-sweep 6s ease-in-out infinite;
+}
+@keyframes shimmer-sweep {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .shimmer { animation: none; background-position: 30% 50%; }
+}
+
 svg { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
 
 /* HERO + FORM */
@@ -201,16 +220,6 @@ svg { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round
   margin-top: 8px;
   padding-top: 28px;
   border-top: 1px solid var(--border);
-}
-/* En móvil esta sección se mueve por JS a después de "procedimientos";
-   como deja de estar dentro de .container, necesita su propio padding lateral. */
-.hero__trust--standalone {
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 24px;
-  padding-right: 24px;
-  padding-bottom: 48px;
 }
 .hero__trust-title {
   font-family: var(--serif);
@@ -483,9 +492,12 @@ svg { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round
 @media (max-width: 960px) {
   .hero__inner {
     grid-template-columns: 1fr;
-    grid-template-areas: "text" "form" "trust";
+    grid-template-areas: "text" "procedures" "form" "trust";
     row-gap: 32px;
   }
+  /* En móvil, la sección de procedimientos (JS la mueve aquí) se vuelve parte
+     de esta cuadrícula para poder aparecer entre el texto y el formulario. */
+  #procedimientos { grid-area: procedures; }
   .hero__text { max-width: 100%; }
   .hero__form { max-width: 520px; }
   .procedures__grid { grid-template-columns: repeat(2, 1fr); }
