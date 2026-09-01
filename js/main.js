@@ -1,3 +1,15 @@
+/* En móvil: "¿por qué elegir?" pasa a ir después de los procedimientos (videos), no antes */
+if (window.matchMedia('(max-width: 960px)').matches) {
+  const heroTrust = document.querySelector('.hero__trust');
+  const procedures = document.getElementById('procedimientos');
+  if (heroTrust) {
+    if (procedures) {
+      heroTrust.classList.add('hero__trust--standalone');
+      procedures.insertAdjacentElement('afterend', heroTrust);
+    }
+  }
+}
+
 if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
   const glow = document.querySelector('.cursor-glow');
   let ticking = false;

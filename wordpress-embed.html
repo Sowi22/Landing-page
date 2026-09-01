@@ -210,6 +210,16 @@ html { scroll-behavior: smooth; }
   padding-top: 28px;
   border-top: 1px solid var(--border);
 }
+/* En móvil esta sección se mueve por JS a después de "procedimientos";
+   como deja de estar dentro de .container, necesita su propio padding lateral. */
+#dr-paolo-rossi-landing .hero__trust--standalone {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-bottom: 48px;
+}
 #dr-paolo-rossi-landing .hero__trust-title {
   font-family: var(--serif);
   font-style: italic;
@@ -308,6 +318,9 @@ html { scroll-behavior: smooth; }
   object-fit: cover;
   filter: brightness(.9) saturate(1.05);
 }
+/* La foto de Rinomodelación es cuadrada; con "cover" en una tarjeta 3:4 se recortaba
+   el logo y parte de la imagen, así que se muestra completa en vez de recortada. */
+#dr-paolo-rossi-landing .proc-card__media--contain { object-fit: contain; background: var(--dark); }
 #dr-paolo-rossi-landing .proc-card__overlay {
   position: absolute;
   inset: 0;
@@ -649,7 +662,7 @@ html { scroll-behavior: smooth; }
         <span class="proc-card__plus">+</span>
       </a>
       <a href="https://www.drpaolorossi.com/services/" class="proc-card reveal" target="_blank" rel="noopener">
-        <img class="proc-card__media" src="https://raw.githubusercontent.com/Sowi22/Landing-page/main/assets/img/rinomodelacion.jpg" alt="Rinomodelación">
+        <img class="proc-card__media proc-card__media--contain" src="https://raw.githubusercontent.com/Sowi22/Landing-page/main/assets/img/rinomodelacion.jpg" alt="Rinomodelación">
         <span class="proc-card__overlay"></span>
         <span class="proc-card__body"><h3>Rinomodelación</h3></span>
         <span class="proc-card__plus">+</span>
@@ -669,6 +682,17 @@ html { scroll-behavior: smooth; }
 
 <script>
 (function() {
+  if (window.matchMedia('(max-width: 960px)').matches) {
+    var heroTrust = document.querySelector('.hero__trust');
+    var procedures = document.getElementById('procedimientos');
+    if (heroTrust) {
+      if (procedures) {
+        heroTrust.classList.add('hero__trust--standalone');
+        procedures.insertAdjacentElement('afterend', heroTrust);
+      }
+    }
+  }
+
   if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
     var glow = document.querySelector('.cursor-glow');
     var ticking = false;

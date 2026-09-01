@@ -202,6 +202,16 @@ svg { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round
   padding-top: 28px;
   border-top: 1px solid var(--border);
 }
+/* En móvil esta sección se mueve por JS a después de "procedimientos";
+   como deja de estar dentro de .container, necesita su propio padding lateral. */
+.hero__trust--standalone {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-bottom: 48px;
+}
 .hero__trust-title {
   font-family: var(--serif);
   font-style: italic;
@@ -300,6 +310,9 @@ svg { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round
   object-fit: cover;
   filter: brightness(.9) saturate(1.05);
 }
+/* La foto de Rinomodelación es cuadrada; con "cover" en una tarjeta 3:4 se recortaba
+   el logo y parte de la imagen, así que se muestra completa en vez de recortada. */
+.proc-card__media--contain { object-fit: contain; background: var(--dark); }
 .proc-card__overlay {
   position: absolute;
   inset: 0;
