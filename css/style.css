@@ -268,11 +268,11 @@ svg { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round
 }
 .section-title__sub { color: var(--text-muted); font-size: clamp(14px, .4vw + 12px, 17px); margin-top: 14px; max-width: 620px; margin-left: auto; margin-right: auto; }
 
-/* PROCEDURES (sin video/foto por procedimiento todavía: tarjetas con icono + degradado de marca) */
+/* PROCEDURES (fotos/videos reales por procedimiento) */
 .procedures { padding: 90px 0; background: var(--bg-alt); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
 .procedures__grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
 }
 .proc-card {
@@ -287,32 +287,36 @@ svg { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round
   justify-content: flex-end;
   padding: 24px;
   border: 1px solid var(--border);
-  background: linear-gradient(155deg, var(--dark) 0%, var(--accent-dark) 130%);
+  background: var(--dark);
   transition: transform .4s cubic-bezier(.2,.8,.2,1), box-shadow .4s;
 }
 .proc-card:hover { transform: translateY(-8px); box-shadow: 0 26px 50px rgba(154,160,170,.44); }
+.proc-card__media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(.9) saturate(1.05);
+}
+.proc-card__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(to top, rgba(30,33,36,.88) 0%, rgba(30,33,36,.3) 45%, rgba(30,33,36,.08) 100%);
+}
 .proc-card::after {
   content: '';
   position: absolute;
   inset: 0;
-  z-index: 0;
-  opacity: .1;
+  z-index: 1;
+  opacity: .08;
   mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   pointer-events: none;
 }
-.proc-card__icon, .proc-card__body, .proc-card__plus { position: relative; z-index: 2; }
-.proc-card__icon {
-  position: absolute;
-  top: 20px; left: 20px;
-  width: 46px; height: 46px;
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  background: rgba(255,255,255,.1);
-  backdrop-filter: blur(6px);
-  border: 1px solid rgba(255,255,255,.2);
-}
-.proc-card__icon svg { width: 20px; height: 20px; color: var(--gold); }
+.proc-card__body, .proc-card__plus { position: relative; z-index: 2; }
 .proc-card__body h3 { font-size: clamp(18px, .7vw + 15px, 23px); font-weight: 600; }
 .proc-card__plus {
   position: absolute;
