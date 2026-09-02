@@ -94,30 +94,14 @@ html { scroll-behavior: smooth; }
   #dr-paolo-rossi-landing .reveal { opacity: 1; transform: none; transition: none; }
 }
 
-/* Wordmark de texto (el logo real del sitio es un PNG blanco pensado para fondo oscuro;
-   sobre nuestro hero claro sería invisible, así que usamos su nombre como wordmark
-   hasta que exista una versión a color en la carpeta Logos). */
 #dr-paolo-rossi-landing .hero__logo-top {
   text-align: center;
   margin-bottom: 22px;
 }
-#dr-paolo-rossi-landing .hero__wordmark {
-  font-family: var(--serif);
-  font-weight: 600;
-  font-size: clamp(22px, 1.6vw + 16px, 30px);
-  color: var(--dark);
-  letter-spacing: .5px;
-}
-#dr-paolo-rossi-landing .hero__wordmark span { color: var(--accent); }
-#dr-paolo-rossi-landing .hero__wordmark-sub {
-  display: block;
-  font-family: var(--sans);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  margin-top: 4px;
+#dr-paolo-rossi-landing .hero__logo-img {
+  width: clamp(150px, 14vw + 100px, 230px);
+  height: auto;
+  margin: 0 auto;
 }
 
 #dr-paolo-rossi-landing {
@@ -327,9 +311,6 @@ html { scroll-behavior: smooth; }
   object-fit: cover;
   filter: brightness(.9) saturate(1.05);
 }
-/* La foto de Rinomodelación es cuadrada; con "cover" en una tarjeta 3:4 se recortaba
-   el logo y parte de la imagen, así que se muestra completa en vez de recortada. */
-#dr-paolo-rossi-landing .proc-card__media--contain { object-fit: contain; background: var(--dark); }
 #dr-paolo-rossi-landing .proc-card__overlay {
   position: absolute;
   inset: 0;
@@ -504,8 +485,11 @@ html { scroll-behavior: smooth; }
     row-gap: 32px;
   }
   /* En móvil, la sección de procedimientos (JS la mueve aquí) se vuelve parte
-     de esta cuadrícula para poder aparecer entre el texto y el formulario. */
+     de esta cuadrícula para poder aparecer entre el texto y el formulario.
+     Se le quita el padding propio de su .container para que no se sume al
+     de .hero__inner y quede desalineada hacia la derecha respecto al texto. */
   #dr-paolo-rossi-landing #procedimientos { grid-area: procedures; }
+  #dr-paolo-rossi-landing #procedimientos .container { padding-left: 0; padding-right: 0; }
   #dr-paolo-rossi-landing .hero__text { max-width: 100%; }
   #dr-paolo-rossi-landing .hero__form { max-width: 520px; }
   #dr-paolo-rossi-landing .procedures__grid { grid-template-columns: repeat(2, 1fr); }
@@ -573,8 +557,7 @@ html { scroll-behavior: smooth; }
   <div class="hero__glow"></div>
   <div class="container">
     <div class="hero__logo-top">
-      <span class="hero__wordmark">Paolo <span>Rossi</span></span>
-      <span class="hero__wordmark-sub">Armonización Dentofacial</span>
+      <img src="https://raw.githubusercontent.com/Sowi22/Landing-page/main/assets/logo/paolo-rossi-logo.png" alt="Dr. Paolo Rossi - Armonización Dentofacial" class="hero__logo-img">
     </div>
   <div class="hero__inner">
     <div class="hero__text">
@@ -674,7 +657,7 @@ html { scroll-behavior: smooth; }
         <span class="proc-card__plus">+</span>
       </a>
       <a href="https://www.drpaolorossi.com/services/" class="proc-card reveal" target="_blank" rel="noopener">
-        <img class="proc-card__media proc-card__media--contain" src="https://raw.githubusercontent.com/Sowi22/Landing-page/main/assets/img/rinomodelacion.jpg" alt="Rinomodelación">
+        <img class="proc-card__media" src="https://raw.githubusercontent.com/Sowi22/Landing-page/main/assets/img/rinomodelacion.jpg" alt="Rinomodelación">
         <span class="proc-card__overlay"></span>
         <span class="proc-card__body"><h3>Rinomodelación</h3></span>
         <span class="proc-card__plus">+</span>
