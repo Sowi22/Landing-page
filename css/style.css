@@ -319,18 +319,8 @@ svg { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   pointer-events: none;
 }
-.proc-card__body, .proc-card__plus { position: relative; z-index: 2; }
+.proc-card__body { position: relative; z-index: 2; }
 .proc-card__body h3 { font-size: clamp(18px, .7vw + 15px, 23px); font-weight: 600; }
-.proc-card__plus {
-  position: absolute;
-  bottom: 20px; right: 20px;
-  width: 34px; height: 34px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-  color: #ffffff;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 18px; font-weight: 600; line-height: 1;
-}
 
 .procedures__dots { display: none; justify-content: center; gap: 8px; margin-top: 20px; }
 .trust__dots { display: none; justify-content: center; gap: 8px; margin-top: 16px; }
@@ -479,8 +469,17 @@ svg { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round
   /* En móvil, la sección de procedimientos (JS la mueve aquí) se vuelve parte
      de esta cuadrícula para poder aparecer entre el texto y el formulario.
      Se le quita el padding propio de su .container para que no se sume al
-     de .hero__inner y quede desalineada hacia la derecha respecto al texto. */
-  #procedimientos { grid-area: procedures; min-width: 0; }
+     de .hero__inner y quede desalineada hacia la derecha respecto al texto,
+     y se le quita el fondo/borde de "tarjeta" para que no se vea como un
+     recuadro aparte, sino como parte natural del hero. */
+  #procedimientos {
+    grid-area: procedures;
+    min-width: 0;
+    background: transparent;
+    border-top: none;
+    border-bottom: none;
+    padding: 8px 0 0;
+  }
   #procedimientos .container { padding-left: 0; padding-right: 0; }
   .hero__text { max-width: 100%; }
   .hero__form { max-width: 520px; }

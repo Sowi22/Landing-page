@@ -327,18 +327,8 @@ html { scroll-behavior: smooth; }
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   pointer-events: none;
 }
-#dr-paolo-rossi-landing .proc-card__body, #dr-paolo-rossi-landing .proc-card__plus { position: relative; z-index: 2; }
+#dr-paolo-rossi-landing .proc-card__body { position: relative; z-index: 2; }
 #dr-paolo-rossi-landing .proc-card__body h3 { font-size: clamp(18px, .7vw + 15px, 23px); font-weight: 600; }
-#dr-paolo-rossi-landing .proc-card__plus {
-  position: absolute;
-  bottom: 20px; right: 20px;
-  width: 34px; height: 34px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-  color: #ffffff;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 18px; font-weight: 600; line-height: 1;
-}
 
 #dr-paolo-rossi-landing .procedures__dots { display: none; justify-content: center; gap: 8px; margin-top: 20px; }
 #dr-paolo-rossi-landing .trust__dots { display: none; justify-content: center; gap: 8px; margin-top: 16px; }
@@ -487,8 +477,17 @@ html { scroll-behavior: smooth; }
   /* En móvil, la sección de procedimientos (JS la mueve aquí) se vuelve parte
      de esta cuadrícula para poder aparecer entre el texto y el formulario.
      Se le quita el padding propio de su .container para que no se sume al
-     de .hero__inner y quede desalineada hacia la derecha respecto al texto. */
-  #dr-paolo-rossi-landing #procedimientos { grid-area: procedures; min-width: 0; }
+     de .hero__inner y quede desalineada hacia la derecha respecto al texto,
+     y se le quita el fondo/borde de "tarjeta" para que no se vea como un
+     recuadro aparte, sino como parte natural del hero. */
+  #dr-paolo-rossi-landing #procedimientos {
+    grid-area: procedures;
+    min-width: 0;
+    background: transparent;
+    border-top: none;
+    border-bottom: none;
+    padding: 8px 0 0;
+  }
   #dr-paolo-rossi-landing #procedimientos .container { padding-left: 0; padding-right: 0; }
   #dr-paolo-rossi-landing .hero__text { max-width: 100%; }
   #dr-paolo-rossi-landing .hero__form { max-width: 520px; }
@@ -644,24 +643,21 @@ html { scroll-behavior: smooth; }
     </div>
 
     <div class="procedures__grid" id="procTrack">
-      <a href="https://www.drpaolorossi.com/services/" class="proc-card reveal" target="_blank" rel="noopener">
+      <div class="proc-card reveal">
         <video class="proc-card__media" src="https://raw.githubusercontent.com/Sowi22/Landing-page/main/assets/video/lipopapada.mp4" autoplay muted loop playsinline></video>
         <span class="proc-card__overlay"></span>
         <span class="proc-card__body"><h3>Lipopapada</h3></span>
-        <span class="proc-card__plus">+</span>
-      </a>
-      <a href="https://www.drpaolorossi.com/services/" class="proc-card reveal" target="_blank" rel="noopener">
+      </div>
+      <div class="proc-card reveal">
         <video class="proc-card__media" src="https://raw.githubusercontent.com/Sowi22/Landing-page/main/assets/video/alectomia.mp4" autoplay muted loop playsinline></video>
         <span class="proc-card__overlay"></span>
         <span class="proc-card__body"><h3>Alectomía</h3></span>
-        <span class="proc-card__plus">+</span>
-      </a>
-      <a href="https://www.drpaolorossi.com/services/" class="proc-card reveal" target="_blank" rel="noopener">
+      </div>
+      <div class="proc-card reveal">
         <img class="proc-card__media" src="https://raw.githubusercontent.com/Sowi22/Landing-page/main/assets/img/rinomodelacion.jpg" alt="Rinomodelación">
         <span class="proc-card__overlay"></span>
         <span class="proc-card__body"><h3>Rinomodelación</h3></span>
-        <span class="proc-card__plus">+</span>
-      </a>
+      </div>
     </div>
     <div class="procedures__dots" id="procDots">
       <span class="dot is-active"></span>
