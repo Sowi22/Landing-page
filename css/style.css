@@ -501,7 +501,7 @@ svg { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round
   .procedures { padding: 56px 0; }
   .procedures__grid { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 14px; padding-bottom: 4px; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
   .procedures__grid::-webkit-scrollbar { display: none; }
-  .proc-card { flex: 0 0 68%; scroll-snap-align: center; aspect-ratio: 3/4; }
+  .proc-card { flex: 0 0 82%; scroll-snap-align: center; aspect-ratio: 3/4; }
   .procedures__dots { display: flex; }
   .section-title .eyebrow { font-size: 21px; }
   .about { padding: 56px 0; }
