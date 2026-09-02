@@ -480,7 +480,7 @@ svg { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round
      de esta cuadrícula para poder aparecer entre el texto y el formulario.
      Se le quita el padding propio de su .container para que no se sume al
      de .hero__inner y quede desalineada hacia la derecha respecto al texto. */
-  #procedimientos { grid-area: procedures; }
+  #procedimientos { grid-area: procedures; min-width: 0; }
   #procedimientos .container { padding-left: 0; padding-right: 0; }
   .hero__text { max-width: 100%; }
   .hero__form { max-width: 520px; }
