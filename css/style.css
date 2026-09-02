@@ -303,6 +303,9 @@ svg { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round
   object-fit: cover;
   filter: brightness(.9) saturate(1.05);
 }
+/* Rinomodelación es una foto cuadrada dentro de una tarjeta vertical; con "cover"
+   siempre recorta algo de los bordes. Se muestra completa sin recortar nada. */
+.proc-card__media--contain { object-fit: contain; background: var(--dark); }
 .proc-card__overlay {
   position: absolute;
   inset: 0;

@@ -311,6 +311,9 @@ html { scroll-behavior: smooth; }
   object-fit: cover;
   filter: brightness(.9) saturate(1.05);
 }
+/* Rinomodelación es una foto cuadrada dentro de una tarjeta vertical; con "cover"
+   siempre recorta algo de los bordes. Se muestra completa sin recortar nada. */
+#dr-paolo-rossi-landing .proc-card__media--contain { object-fit: contain; background: var(--dark); }
 #dr-paolo-rossi-landing .proc-card__overlay {
   position: absolute;
   inset: 0;
@@ -654,7 +657,7 @@ html { scroll-behavior: smooth; }
         <span class="proc-card__body"><h3>Alectomía</h3></span>
       </div>
       <div class="proc-card reveal">
-        <img class="proc-card__media" src="https://raw.githubusercontent.com/Sowi22/Landing-page/main/assets/img/rinomodelacion.jpg" alt="Rinomodelación">
+        <img class="proc-card__media proc-card__media--contain" src="https://raw.githubusercontent.com/Sowi22/Landing-page/main/assets/img/rinomodelacion.jpg" alt="Rinomodelación">
         <span class="proc-card__overlay"></span>
         <span class="proc-card__body"><h3>Rinomodelación</h3></span>
       </div>
